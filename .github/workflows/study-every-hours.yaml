@@ -1,15 +1,10 @@
-name: 'Study Every 45 Minutes'
+name: 'Complete 50 Lessons Every 45 Minutes'
 run-name: 'Your study script is running! Click me to see its progress.'
 
 on:
   schedule:
-    - cron: '*/45 * * * *' # Chạy mỗi 45 phút
+    - cron: '*/45 * * * *' 
   workflow_dispatch:
-    inputs:
-      lessonsToComplete:
-        description: 'Number of lessons to complete per run'
-        required: false
-        default: 5
 
 jobs:
   run-script:
@@ -21,11 +16,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
+        
       - run: npm install node-fetch
-        # Cài đặt node-fetch nếu chưa có trong package.json
+        
 
       - run: node index.js
         env:
-          TOKEN: ${{ secrets.TOKEN }} # JWT token từ GitHub Secrets
-          LESSONS: ${{ github.event.inputs.lessonsToComplete || 5 }} # Số lessons từ input hoặc mặc định là 5
+          LESSONS: 50 
+          TOKEN: ${{ secrets.TOKEN }} 
